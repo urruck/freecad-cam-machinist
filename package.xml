@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
+  <name>Portique CAM</name>
+  <description>Affiche le portique et la broche de la fraiseuse dans l'atelier CAM, les fait suivre le parcours d'outil et contrôle collisions et courses. Modèle STEP de broche importable, profils machine partageables.</description>
+  <version>0.2.0</version>
+  <date>2026-10-23</date>
+  <maintainer email="a-completer@exemple.org">FabLab Le Boc@l</maintainer>
+  <author>FabLab Le Boc@l, Centre Social et Socioculturel du Chemillois</author>
+  <license file="LICENSE">LGPL-2.1-or-later</license>
+  <url type="repository" branch="main">https://github.com/urruck/freecad-cam-machinist</url>
+  <url type="readme">https://github.com/urruck/freecad-cam-machinist/blob/main/README.md</url>
+  <url type="bugtracker">https://github.com/urruck/freecad-cam-machinist/issues</url>
+  <icon>freecad/portiquecam/resources/icons/portiquecam.svg</icon>
+  <freecadmin>1.0.0</freecadmin>
+  <tag>CAM</tag>
+  <tag>CNC</tag>
+  <tag>simulation</tag>
+  <tag>collision</tag>
+  <tag>fablab</tag>
+  <content>
+    <other>
+      <name>Portique CAM</name>
+      <description>Portique et broche dans l'atelier CAM, contrôle des collisions et des courses.</description>
+      <icon>freecad/portiquecam/resources/icons/portiquecam.svg</icon>
+    </other>
+  </content>
+</package>
