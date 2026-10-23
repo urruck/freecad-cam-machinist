@@ -1,5 +1,10 @@
 # Journal des versions
 
+## 0.2.1 (2026-10-23)
+
+- L'extension prend le nom du dépôt : « CAM Machinist » (publiée quelques minutes plus tôt sous le nom « Portique CAM »).
+- Adresse de contact dans `package.xml`.
+
 ## 0.2.0 (2026-10-23)
 
 - La macro devient une extension FreeCAD : bouton dans la barre d'outils et le menu de l'atelier CAM.

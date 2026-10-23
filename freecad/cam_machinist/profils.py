@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # SPDX-License-Identifier: LGPL-2.1-or-later
-# Portique CAM · FabLab Le Boc@l, Centre Social et Socioculturel du Chemillois
+# CAM Machinist · FabLab Le Boc@l, Centre Social et Socioculturel du Chemillois
 """Profils machine (cotes + modèle STEP de broche) et outils d'alignement du STEP.
 
 Un profil est un dossier contenant profil.json et, s'il y a un modèle de
 broche, la copie du fichier d'origine et la forme alignée (broche.brep).
 Profils fournis : resources/machines/<id>/ (lecture seule).
-Profils de l'utilisateur·ice : <dossier utilisateur FreeCAD>/PortiqueCAM/machines/<id>/.
+Profils de l'utilisateur·ice : <dossier utilisateur FreeCAD>/CAMMachinist/machines/<id>/.
 Un profil utilisateur de même identifiant remplace le profil fourni.
 """
 
@@ -31,7 +31,7 @@ EXTENSIONS_MODELE = (".step", ".stp", ".iges", ".igs", ".brep", ".brp")
 
 
 def dossier_utilisateur():
-    d = os.path.join(App.getUserAppDataDir(), "PortiqueCAM", "machines")
+    d = os.path.join(App.getUserAppDataDir(), "CAMMachinist", "machines")
     os.makedirs(d, exist_ok=True)
     return d
 

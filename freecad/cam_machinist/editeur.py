@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # SPDX-License-Identifier: LGPL-2.1-or-later
-# Portique CAM · FabLab Le Boc@l, Centre Social et Socioculturel du Chemillois
+# CAM Machinist · FabLab Le Boc@l, Centre Social et Socioculturel du Chemillois
 """Éditeur de profil machine : cotes, modèle STEP de la broche, partage."""
 
 import os
@@ -18,7 +18,7 @@ except ImportError:
     from PySide import QtCore, QtGui
     QtWidgets = QtGui
 
-NOM_DOC_ALIGNEMENT = "PortiqueCAM_Alignement"
+NOM_DOC_ALIGNEMENT = "CAMMachinist_Alignement"
 _OUVERT = []
 
 
@@ -43,7 +43,7 @@ def _nombre(txt):
 class Editeur(QtWidgets.QDialog):
     def __init__(self, ident, doc, rappel):
         super(Editeur, self).__init__(Gui.getMainWindow())
-        self.setWindowTitle("Portique CAM · profil machine")
+        self.setWindowTitle("CAM Machinist · profil machine")
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose, True)
         self.resize(820, 860)
         self.doc_cam = doc
@@ -295,7 +295,7 @@ class Editeur(QtWidgets.QDialog):
             source = profils.lire_modele(chemin)
         except Exception as e:
             self.occupe(False)
-            QtWidgets.QMessageBox.warning(self, "Portique CAM", "Lecture impossible :\n%s" % e)
+            QtWidgets.QMessageBox.warning(self, "CAM Machinist", "Lecture impossible :\n%s" % e)
             return
         self.occupe(False)
         self.ouvrir_session(chemin, source, App.Placement(), os.path.basename(chemin))
@@ -308,7 +308,7 @@ class Editeur(QtWidgets.QDialog):
         try:
             source = profils.lire_modele(chemin)
         except Exception as e:
-            QtWidgets.QMessageBox.warning(self, "Portique CAM", "Fichier source illisible :\n%s" % e)
+            QtWidgets.QMessageBox.warning(self, "CAM Machinist", "Fichier source illisible :\n%s" % e)
             return
         self.ck_coulisse.setChecked(bool(b.get("inclut_coulisse")))
         self.ck_couper.setChecked(bool(b.get("couper_sous_nez", True)))
@@ -423,7 +423,7 @@ class Editeur(QtWidgets.QDialog):
             return
         if not self.session["aligne"]:
             r = QtWidgets.QMessageBox.question(
-                self, "Portique CAM", "Le modèle n'a pas été aligné sur le nez de broche. Valider quand même ?")
+                self, "CAM Machinist", "Le modèle n'a pas été aligné sur le nez de broche. Valider quand même ?")
             if r != QtWidgets.QMessageBox.Yes:
                 return
         self.occupe(True)
@@ -433,7 +433,7 @@ class Editeur(QtWidgets.QDialog):
                                         nom_origine=self.session["nom_origine"])
         except Exception as e:
             self.occupe(False)
-            QtWidgets.QMessageBox.warning(self, "Portique CAM", "Préparation du modèle impossible :\n%s" % e)
+            QtWidgets.QMessageBox.warning(self, "CAM Machinist", "Préparation du modèle impossible :\n%s" % e)
             return
         self.occupe(False)
         self.modele_en_attente = m
@@ -469,7 +469,7 @@ class Editeur(QtWidgets.QDialog):
     def enregistrer(self, ident=None):
         erreurs = self.lire_tableau()
         if erreurs:
-            QtWidgets.QMessageBox.warning(self, "Portique CAM", "Valeurs illisibles : " + ", ".join(erreurs))
+            QtWidgets.QMessageBox.warning(self, "CAM Machinist", "Valeurs illisibles : " + ", ".join(erreurs))
             return None
         self.occupe(True)
         try:
@@ -477,7 +477,7 @@ class Editeur(QtWidgets.QDialog):
                                         modele_en_attente=self.modele_en_attente)
         except Exception as e:
             self.occupe(False)
-            QtWidgets.QMessageBox.warning(self, "Portique CAM", "Enregistrement impossible :\n%s" % e)
+            QtWidgets.QMessageBox.warning(self, "CAM Machinist", "Enregistrement impossible :\n%s" % e)
             return None
         self.occupe(False)
         self.prof = profils.charger(ident)
@@ -493,14 +493,14 @@ class Editeur(QtWidgets.QDialog):
         return ident
 
     def enregistrer_sous(self):
-        nom, ok = QtWidgets.QInputDialog.getText(self, "Portique CAM", "Nom du nouveau profil :",
+        nom, ok = QtWidgets.QInputDialog.getText(self, "CAM Machinist", "Nom du nouveau profil :",
                                                  text=self.ed_nom.text() + " (copie)")
         if not ok or not nom.strip():
             return
         ident = profils.identifiant(nom)
         info = profils.lister().get(ident)
         if info and not info["fourni"]:
-            r = QtWidgets.QMessageBox.question(self, "Portique CAM", "Le profil « %s » existe : le remplacer ?" % info["nom"])
+            r = QtWidgets.QMessageBox.question(self, "CAM Machinist", "Le profil « %s » existe : le remplacer ?" % info["nom"])
             if r != QtWidgets.QMessageBox.Yes:
                 return
         self.ed_nom.setText(nom.strip())
@@ -520,7 +520,7 @@ class Editeur(QtWidgets.QDialog):
             if self.enregistrer() is None:
                 return
         chemin, _f = QtWidgets.QFileDialog.getSaveFileName(self, "Exporter le profil", self.prof["_id"] + ".zip",
-                                                           "Profil Portique CAM (*.zip)")
+                                                           "Profil CAM Machinist (*.zip)")
         if not chemin:
             return
         if not chemin.lower().endswith(".zip"):
@@ -531,13 +531,13 @@ class Editeur(QtWidgets.QDialog):
     def importer_zip(self):
         if not self.confirmer_abandon():
             return
-        chemin, _f = QtWidgets.QFileDialog.getOpenFileName(self, "Importer un profil", "", "Profil Portique CAM (*.zip)")
+        chemin, _f = QtWidgets.QFileDialog.getOpenFileName(self, "Importer un profil", "", "Profil CAM Machinist (*.zip)")
         if not chemin:
             return
         try:
             ident = profils.importer_zip(chemin)
         except Exception as e:
-            QtWidgets.QMessageBox.warning(self, "Portique CAM", "Import impossible :\n%s" % e)
+            QtWidgets.QMessageBox.warning(self, "CAM Machinist", "Import impossible :\n%s" % e)
             return
         self.prof = profils.charger(ident)
         self.modele_en_attente = None
@@ -551,7 +551,7 @@ class Editeur(QtWidgets.QDialog):
         ident = self.prof.get("_id")
         if not ident or self.prof.get("_fourni"):
             return
-        r = QtWidgets.QMessageBox.question(self, "Portique CAM", "Supprimer le profil « %s » de ce poste ?" % self.prof["nom"])
+        r = QtWidgets.QMessageBox.question(self, "CAM Machinist", "Supprimer le profil « %s » de ce poste ?" % self.prof["nom"])
         if r != QtWidgets.QMessageBox.Yes:
             return
         profils.supprimer(ident)
@@ -590,7 +590,7 @@ class Editeur(QtWidgets.QDialog):
     def confirmer_abandon(self):
         if not self.modifie:
             return True
-        r = QtWidgets.QMessageBox.question(self, "Portique CAM", "Abandonner les modifications non enregistrées ?")
+        r = QtWidgets.QMessageBox.question(self, "CAM Machinist", "Abandonner les modifications non enregistrées ?")
         return r == QtWidgets.QMessageBox.Yes
 
     def closeEvent(self, ev):

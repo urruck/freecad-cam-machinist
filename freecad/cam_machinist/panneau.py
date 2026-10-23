@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # SPDX-License-Identifier: LGPL-2.1-or-later
-# Portique CAM · FabLab Le Boc@l, Centre Social et Socioculturel du Chemillois
+# CAM Machinist · FabLab Le Boc@l, Centre Social et Socioculturel du Chemillois
 """Panneau latéral : profil machine, mise en place du Job, suivi du parcours, contrôle."""
 
 import json
@@ -18,7 +18,7 @@ except ImportError:
     from PySide import QtCore
     from PySide import QtGui as QtWidgets
 
-NOM_DOCK = "PortiqueCAMDock"
+NOM_DOCK = "CAMMachinistDock"
 
 
 def ouvrir():
@@ -50,7 +50,7 @@ def _spin(mini, maxi, val, suffixe=" mm"):
 
 class Panneau(QtWidgets.QDockWidget):
     def __init__(self):
-        super(Panneau, self).__init__("Portique CAM")
+        super(Panneau, self).__init__("CAM Machinist")
         self.setObjectName(NOM_DOCK)
         self.doc = None
         self.prof = None
@@ -536,7 +536,7 @@ class Panneau(QtWidgets.QDockWidget):
                 lignes.append("%s ↔ %s : %s" % (corps_, obst, etat))
             txt = "Mesure exacte à cette position :\n" + "\n".join(lignes)
         self.resume.setText(txt)
-        App.Console.PrintMessage("[Portique CAM] " + txt.replace("\n", "\n   ") + "\n")
+        App.Console.PrintMessage("[CAM Machinist] " + txt.replace("\n", "\n   ") + "\n")
 
     def choisir(self, it):
         k = it.data(QtCore.Qt.UserRole)

@@ -1,10 +1,10 @@
-# Portique CAM
+# CAM Machinist
 
 Extension FreeCAD qui ajoute la machine dans l'atelier CAM : le portique, le chariot, la coulisse Z et la broche suivent le parcours d'outil du Job, et un contrôle signale les collisions et les dépassements de course avant d'envoyer le programme à la fraiseuse.
 
 Développée au FabLab Le Boc@l (Centre Social et Socioculturel du Chemillois) pour remettre en service notre fraiseuse Excitech. Elle convient à toute fraiseuse 3 axes à portique : chaque lieu décrit sa machine dans un profil, qu'il peut partager avec d'autres.
 
-![Portique CAM dans l'atelier CAM](docs/apercu.png)
+![CAM Machinist dans l'atelier CAM](docs/apercu.png)
 
 ## Ce que fait l'extension
 
@@ -22,22 +22,22 @@ FreeCAD 1.0 ou plus récent (testé avec FreeCAD 1.1.1 et 26.3).
 **Par le gestionnaire d'extensions (recommandé)**
 
 1. Dans les préférences du gestionnaire d'extensions de FreeCAD (Addon Manager), ajouter un dépôt personnalisé : `https://github.com/urruck/freecad-cam-machinist`, branche `main`.
-2. Ouvrir le gestionnaire d'extensions, chercher « Portique CAM », installer, puis redémarrer FreeCAD.
+2. Ouvrir le gestionnaire d'extensions, chercher « CAM Machinist », installer, puis redémarrer FreeCAD.
 
 **À la main**
 
 1. Trouver le dossier des extensions : dans la console Python de FreeCAD (Affichage › Panneaux › Console Python), taper `App.getUserAppDataDir()`. Le dossier `Mod` se trouve dedans, par exemple `~/.local/share/FreeCAD/v1-1/Mod/` sous Linux avec FreeCAD 1.1.
 2. Y décompresser l'archive du dépôt (bouton « Code » › « Download ZIP » sur GitHub), puis redémarrer FreeCAD. Le nom du dossier créé dans `Mod` n'a pas d'importance.
 
-Le bouton **Portique CAM** apparaît dans la barre d'outils de l'atelier CAM, à côté des outils d'inspection, et dans le menu CAM avec **Profils machine…**.
+Le bouton **CAM Machinist** apparaît dans la barre d'outils de l'atelier CAM, à côté des outils d'inspection, et dans le menu CAM avec **Profils machine…**.
 
 ## Utilisation
 
-1. Ouvrir le document qui contient le Job CAM et cliquer sur **Portique CAM**.
+1. Ouvrir le document qui contient le Job CAM et cliquer sur **CAM Machinist**.
 2. **Machine** : choisir le profil, puis **Modifier…** pour saisir les cotes mesurées sur la machine.
 3. **Mise en place** : indiquer où se trouve l'origine du Job (le G54) depuis le coin de table. Par défaut, le dessus de table est pris sous le brut.
 4. Glisser les serre-joints, cales et tasseaux dans le groupe **Bridage** du document.
-5. **Charger le parcours du Job**. Chaque Tool Controller reçoit deux réglages dans ses propriétés (groupe « Portique CAM ») : la jauge (nez de broche → pointe de l'outil) et la sortie d'outil.
+5. **Charger le parcours du Job**. Chaque Tool Controller reçoit deux réglages dans ses propriétés (groupe « CAM Machinist ») : la jauge (nez de broche → pointe de l'outil) et la sortie d'outil.
 6. **Contrôler tout le parcours**, puis cliquer les alertes pour voir où ça coince.
 
 Gravités affichées :
@@ -72,7 +72,7 @@ Pour le contrôle de tout le parcours, la broche est remplacée par une **envelo
 ## Profils machine
 
 - Le profil fourni « Excitech Boc@l (cotes à mesurer) » contient des **valeurs de départ, pas les cotes réelles** : tant qu'elles ne sont pas mesurées, le contrôle ne garantit rien.
-- Les profils personnels sont rangés dans `<dossier utilisateur FreeCAD>/PortiqueCAM/machines/`. Un profil personnel de même nom remplace le profil fourni.
+- Les profils personnels sont rangés dans `<dossier utilisateur FreeCAD>/CAMMachinist/machines/`. Un profil personnel de même nom remplace le profil fourni.
 - **Exporter (.zip)** / **Importer (.zip)** : un profil voyage avec son modèle de broche.
 - Le document garde une copie des cotes : ouvert sur un poste qui n'a pas le profil, il reste utilisable (sans le modèle STEP).
 - **Reprendre le tableur de la macro** récupère les cotes saisies dans l'ancienne macro `Excitech_Bocal.FCMacro`.

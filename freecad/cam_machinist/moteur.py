@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # SPDX-License-Identifier: LGPL-2.1-or-later
-# Portique CAM · FabLab Le Boc@l, Centre Social et Socioculturel du Chemillois
+# CAM Machinist · FabLab Le Boc@l, Centre Social et Socioculturel du Chemillois
 """Moteur : géométrie de la machine, lecture du parcours d'outil, contrôle des collisions.
 
 Repère : celui du Job CAM. La pose de référence de la tête place la pointe de
@@ -17,11 +17,11 @@ import FreeCAD as App
 import Part
 import numpy as np
 
-PREFIXE = "PCam_"
-NOM_GROUPE = "Machine_PortiqueCAM"
+PREFIXE = "CMach_"
+NOM_GROUPE = "Machine_CAMMachinist"
 NOM_BRIDAGE = "Bridage"
-NOM_COLLISIONS = "Collisions_PortiqueCAM"
-GROUPE_PROPS = "Portique CAM"
+NOM_COLLISIONS = "Collisions_CAMMachinist"
+GROUPE_PROPS = "CAM Machinist"
 
 # -----------------------------------------------------------------------------
 #  Paramètres de la machine (enregistrés dans le profil)
@@ -93,10 +93,10 @@ PARAMS = [
 
 # Mise en place, propre à chaque Job (propriétés du Job)
 MISE_EN_PLACE = [
-    ("PCamOrigineX", "OrigineX", 20.0, "Position du X0 du Job depuis le coin de table"),
-    ("PCamOrigineY", "OrigineY", 20.0, "Position du Y0 du Job depuis le coin de table"),
-    ("PCamTableAuto", "TableZAuto", 1.0, "Dessus de table pris sous le brut du Job"),
-    ("PCamTableZ", "TableZ", 0.0, "Z du dessus de table si le réglage automatique est coupé"),
+    ("CMachOrigineX", "OrigineX", 20.0, "Position du X0 du Job depuis le coin de table"),
+    ("CMachOrigineY", "OrigineY", 20.0, "Position du Y0 du Job depuis le coin de table"),
+    ("CMachTableAuto", "TableZAuto", 1.0, "Dessus de table pris sous le brut du Job"),
+    ("CMachTableZ", "TableZ", 0.0, "Z du dessus de table si le réglage automatique est coupé"),
 ]
 
 COULEURS = {
@@ -132,11 +132,11 @@ NOMS_OBSTACLES = {"table": "table", "bridage": "bridage", "piece": "pièce", "br
 
 
 def log(msg):
-    App.Console.PrintMessage("[Portique CAM] " + msg + "\n")
+    App.Console.PrintMessage("[CAM Machinist] " + msg + "\n")
 
 
 def avert(msg):
-    App.Console.PrintWarning("[Portique CAM] " + msg + "\n")
+    App.Console.PrintWarning("[CAM Machinist] " + msg + "\n")
 
 
 def params_defaut():
@@ -359,7 +359,7 @@ def groupe_machine(doc, creer=True):
     grp = doc.getObject(NOM_GROUPE)
     if grp is None and creer:
         grp = doc.addObject("App::DocumentObjectGroup", NOM_GROUPE)
-        grp.Label = "Machine (Portique CAM)"
+        grp.Label = "Machine (CAM Machinist)"
         grp.addProperty("App::PropertyString", "Profil", GROUPE_PROPS, "Profil machine utilisé")
         grp.addProperty("App::PropertyString", "ProfilParams", GROUPE_PROPS,
                         "Copie des cotes du profil, utilisée si le profil manque sur ce poste")
@@ -1046,7 +1046,7 @@ def texte_evenement(e, pc, deux_lignes=False):
 
 
 def rapport(R, pc, job):
-    lignes = ["Portique CAM · contrôle du Job « %s »" % job.Label]
+    lignes = ["CAM Machinist · contrôle du Job « %s »" % job.Label]
     lignes += R.infos
     lignes += pc.avertissements
     if not R.evenements:
@@ -1072,12 +1072,12 @@ def marquer(doc, R, pc, maxi=200):
         return
     if g is None:
         g = doc.addObject("App::DocumentObjectGroup", NOM_COLLISIONS)
-    g.Label = "Collisions (Portique CAM)"
+    g.Label = "Collisions (CAM Machinist)"
     couleurs = {"COLLISION": (0.9, 0.0, 0.0), "COURSE": (0.6, 0.0, 0.8), "FRÔLEMENT": (1.0, 0.4, 0.0),
                 "À VÉRIFIER": (1.0, 0.6, 0.0), "BROSSE": (1.0, 0.9, 0.0)}
     for i, e in enumerate(R.evenements[:maxi]):
         k = e["pire"]
-        o = doc.addObject("Part::Feature", "PCamCol%03d" % i)
+        o = doc.addObject("Part::Feature", "CMachCol%03d" % i)
         o.Shape = Part.makeSphere(6, App.Vector(pc.X[k], pc.Y[k], pc.Z[k]))
         o.Label = "%s %s" % (e["gravite"].capitalize(), e["corps"])
         g.addObject(o)
