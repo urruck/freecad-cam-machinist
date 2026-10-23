@@ -1,5 +1,10 @@
 # Journal des versions
 
+## 0.2.2 (2026-10-23)
+
+- Axes X et Y corrigés dans le profil Excitech fourni et les valeurs par défaut : table 1600 x 3100, portique qui avance en Y. Le moteur, lui, suivait déjà correctement le profil.
+- Bouton « Permuter X et Y » dans l'éditeur de profil : échange en un clic les cotes X/Y de la table et des courses, et l'axe d'avance du portique.
+
 ## 0.2.1 (2026-10-23)
 
 - L'extension prend le nom du dépôt : « CAM Machinist » (publiée quelques minutes plus tôt sous le nom « Portique CAM »).

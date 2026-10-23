@@ -3,4 +3,4 @@
 # CAM Machinist · FabLab Le Boc@l, Centre Social et Socioculturel du Chemillois
 """Portique et broche de la fraiseuse dans l'atelier CAM de FreeCAD."""
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"

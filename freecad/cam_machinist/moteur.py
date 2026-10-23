@@ -29,20 +29,20 @@ GROUPE_PROPS = "CAM Machinist"
 # -----------------------------------------------------------------------------
 PARAMS = [
     ("Table", None, None, None, None),
-    ("", "TableX", 3100, "mm", "Longueur de la table selon X"),
-    ("", "TableY", 1600, "mm", "Largeur de la table selon Y"),
+    ("", "TableX", 1600, "mm", "Dimension de la table selon X"),
+    ("", "TableY", 3100, "mm", "Dimension de la table selon Y"),
     ("", "TableEp", 60, "mm", "Épaisseur dessinée de la table (martyr compris)"),
 
     ("Courses (depuis le coin de table)", None, None, None, None),
     ("", "CourseXmin", 0, "mm", "Axe broche : X mini atteignable"),
-    ("", "CourseXmax", 3050, "mm", "Axe broche : X maxi atteignable"),
+    ("", "CourseXmax", 1530, "mm", "Axe broche : X maxi atteignable"),
     ("", "CourseYmin", 0, "mm", "Axe broche : Y mini atteignable"),
-    ("", "CourseYmax", 1530, "mm", "Axe broche : Y maxi atteignable"),
+    ("", "CourseYmax", 3050, "mm", "Axe broche : Y maxi atteignable"),
     ("", "NezHautMax", 260, "mm", "Hauteur du nez de broche au-dessus de la table, Z en butée haute"),
     ("", "CourseZ", 200, "mm", "Course utile en Z"),
 
     ("Portique", None, None, None, None),
-    ("", "AxePortique", 0, "0/1", "0 = le portique se déplace en X, 1 = en Y"),
+    ("", "AxePortique", 1, "0/1", "1 = le portique avance en Y (grand côté en Y), 0 = il avance en X"),
     ("", "SensPoutre", 1, "+1/-1", "+1 = poutre côté + de l'axe portique par rapport à la broche, -1 = côté -"),
     ("", "PassageSousPortique", 200, "mm", "Hauteur libre entre table et dessous de poutre"),
     ("", "DecalagePoutre", 220, "mm", "Distance axe broche → face avant de la poutre"),

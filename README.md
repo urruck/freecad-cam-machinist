@@ -72,6 +72,7 @@ Pour le contrôle de tout le parcours, la broche est remplacée par une **envelo
 ## Profils machine
 
 - Le profil fourni « Excitech Boc@l (cotes à mesurer) » contient des **valeurs de départ, pas les cotes réelles** : tant qu'elles ne sont pas mesurées, le contrôle ne garantit rien.
+- **Permuter X et Y** : si la machine dessinée paraît tournée d'un quart de tour par rapport à la vraie, ce bouton échange les cotes X et Y de la table et des courses, et l'axe d'avance du portique.
 - Les profils personnels sont rangés dans `<dossier utilisateur FreeCAD>/CAMMachinist/machines/`. Un profil personnel de même nom remplace le profil fourni.
 - **Exporter (.zip)** / **Importer (.zip)** : un profil voyage avec son modèle de broche.
 - Le document garde une copie des cotes : ouvert sur un poste qui n'a pas le profil, il reste utilisable (sans le modèle STEP).

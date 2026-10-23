@@ -160,6 +160,10 @@ class Editeur(QtWidgets.QDialog):
         self.b_tableur.clicked.connect(self.reprendre_tableur)
         self.b_tableur.setVisible(self.doc_cam is not None and self.doc_cam.getObject("MachineParams") is not None)
         r.addWidget(self.b_tableur)
+        b = QtWidgets.QPushButton("Permuter X et Y")
+        b.setToolTip("Échange les cotes X et Y de la table et des courses, et l'axe d'avance du portique")
+        b.clicked.connect(self.permuter_xy)
+        r.addWidget(b)
         b = QtWidgets.QPushButton("Nouveau")
         b.clicked.connect(self.nouveau)
         r.addWidget(b)
@@ -564,6 +568,26 @@ class Editeur(QtWidgets.QDialog):
         self.dire("Profil supprimé.")
         if self.rappel and self.prof.get("_id"):
             self.rappel(self.prof["_id"])
+
+    def permuter_xy(self):
+        """Pour une machine dont les axes X et Y sont dans l'autre sens : table, courses, avance du portique."""
+        self._remplissage = True
+        try:
+            for xa, ya in (("TableX", "TableY"), ("CourseXmin", "CourseYmin"), ("CourseXmax", "CourseYmax")):
+                ix, iy = self.table.item(self.lignes[xa], 1), self.table.item(self.lignes[ya], 1)
+                tx, ty = ix.text(), iy.text()
+                ix.setText(ty)
+                iy.setText(tx)
+            it = self.table.item(self.lignes["AxePortique"], 1)
+            try:
+                v = _nombre(it.text())
+            except ValueError:
+                v = 0.0
+            it.setText("1" if v < 0.5 else "0")
+        finally:
+            self._remplissage = False
+        self.modifie = True
+        self.dire("X et Y permutés (table, courses, avance du portique). Vérifier puis enregistrer.")
 
     def reprendre_tableur(self):
         p = profils.reprendre_tableur(self.doc_cam)
